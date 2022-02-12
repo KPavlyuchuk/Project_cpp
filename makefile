@@ -1,4 +1,4 @@
-FLAFS=-fprofile-arcs -ftests-coverage
+FLAGS=-fprofile-arcs -ftest-coverage
 all: tests
 tests: tests.o stack.o
 	gcc stack.o tests.o -o tests ${FLAGS}
@@ -7,4 +7,4 @@ tests.o: tests.c
 stack.o: stack.c
 	gcc -c stack.c -o stack.o ${FLAGS}
 clean:
-	rm -rf tests *.o
+	rm -rf tests *.o *.gcno *.gcda
