@@ -2,34 +2,58 @@
 
 stack * create_stack(int size) 
 {
+	if (size <= 0) {
+		fprintf(stderr, "Size error\n");
+		return NULL;
+	}
 	stack * s = (stack *)malloc(sizeof(stack));
 	if (s == NULL) {
-		perror("S ERROR");
-		exit(1);
+		fprintf(stderr, "Stack create ERROR\n");
+		return NULL;
 	}
-	s -> arr = (int*)malloc(size * sizeof(int));
-	if (s -> arr == NULL) {
-		perror("ARR ERROR");
-		exit(1);
+	s->arr = (int*)malloc(size * sizeof(int));
+	if (s->arr == NULL) {
+		fprintf(stderr, "Array ERROR\n");
+		return NULL;
 	}
-	s -> size = size;
-	s -> crt = 0;
+	s->size = size;
+	s->crt = 0;
 	return s;
 }
 
 void remove_stack(stack * s) 
 {
-	free (s -> arr);
+	if (s == NULL) {
+		fprintf(stderr, "Not Empty Stack\n");
+		return;
+	}
+	free (s->arr);
 	free(s);
 }
 
 int pop(stack * s) 
 {
-	return s -> arr[-- s -> crt];
+	if (s == NULL) {
+		fprintf(stderr, "Stack_pop error\n");
+		return -1;
+	}
+	if (s->crt == 0) {
+		fprintf(stderr, "Stack is empty\n");
+		return -1;
+	}
+	return s->arr[-- s->crt];
 }
 
 void push(stack * s, int val) 
 {
-	s ->arr[s -> crt ++] = val;
+	if (s == NULL) {
+		fprintf(stderr, "Stack_push error\n");
+		return;
+	}
+	if (s->crt == s->size) {
+		fprintf(stderr, "Stack is full\n");
+		return;
+	}
+	s->arr[s->crt ++] = val;
 }
 	
