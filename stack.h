@@ -15,7 +15,7 @@ typedef enum {
 	EALLOC
 } STACK_ERR;
 
-stack * create_stack(int size);
-void remove_stack (stack * s);
-int pop(stack * s);
-void push (stack * s, int val);
+stack * create_stack(int size, STACK_ERR *err);
+void remove_stack (stack * s, STACK_ERR *err);
+int pop(stack * s, STACK_ERR *err);
+void push (stack * s, int val, STACK_ERR *err);

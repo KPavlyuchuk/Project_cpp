@@ -1,8 +1,10 @@
 #include "stack.h"
 
-stack * create_stack(int size) 
+stack * create_stack(int size, STACK_ERR *err) 
 {
 	if (size <= 0) {
+		if (err != NULL)
+			*err = EINVARG;
 		fprintf(stderr, "Size error\n");
 		return NULL;
 	}
@@ -21,7 +23,7 @@ stack * create_stack(int size)
 	return s;
 }
 
-void remove_stack(stack * s) 
+void remove_stack(stack * s, STACK_ERR *err) 
 {
 	if (s == NULL) {
 		fprintf(stderr, "Not Empty Stack\n");
@@ -31,7 +33,7 @@ void remove_stack(stack * s)
 	free(s);
 }
 
-int pop(stack * s) 
+int pop(stack * s, STACK_ERR *err) 
 {
 	if (s == NULL) {
 		fprintf(stderr, "Stack_pop error\n");
@@ -44,7 +46,7 @@ int pop(stack * s)
 	return s->arr[-- s->crt];
 }
 
-void push(stack * s, int val) 
+void push(stack * s, int val, STACK_ERR *err) 
 {
 	if (s == NULL) {
 		fprintf(stderr, "Stack_push error\n");
